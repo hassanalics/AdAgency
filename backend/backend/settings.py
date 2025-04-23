@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -126,3 +127,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = 'amqp://user:password@rabbitmq:5672//'
+CELERY_RESULT_BACKEND = 'rpc://'  # Or use another backend (e.g., database)
+
+CELERY_BEAT_SCHEDULE = {
+    'reset-daily': {
+        'task': 'adagency.tasks.reset_all_daily_spends',
+        'schedule': crontab(hour=0, minute=0),
+    },
+    'reset-monthly': {
+        'task': 'adagency.tasks.reset_all_monthly_spends',
+        'schedule': crontab(day_of_month='1', hour=0, minute=0),
+    },
+}

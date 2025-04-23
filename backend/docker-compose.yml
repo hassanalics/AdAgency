@@ -3,6 +3,7 @@ version: '3.8'
 services:
   backend:
     build: .
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     container_name: backend
     volumes:
       - .:/app
@@ -10,6 +11,7 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - rabbitmq
     environment:
       - DEBUG=1
 
@@ -25,6 +27,35 @@ services:
       - "5435:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"  # management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+
+  celery_worker:
+    build: .
+    command: celery -A backend worker --loglevel=info
+    container_name: celery_worker
+    volumes:
+      - .:/app
+    depends_on:
+      - rabbitmq
+      - backend
+
+  celery_beat:
+    build: .
+    command: celery -A backend beat --loglevel=info
+    container_name: celery_beat
+    volumes:
+      - .:/app
+    depends_on:
+    - rabbitmq
+    - backend
 
 volumes:
   postgres_data:
