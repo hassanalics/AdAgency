@@ -37,6 +37,9 @@ class Brand(models.Model):
                     campaign.is_active = True
                     campaign.save()
 
+    def __str__(self):
+        return self.name
+
 
 class Campaign(models.Model):
     brand = models.ForeignKey(Brand, related_name="campaigns", on_delete=models.CASCADE)
@@ -51,3 +54,6 @@ class Campaign(models.Model):
         if self.start_hour is None or self.end_hour is None:
             return True
         return self.start_hour <= current_hour < self.end_hour
+    
+    def __str__(self):
+        return self.name
