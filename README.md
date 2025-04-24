@@ -61,14 +61,19 @@ cd frontend && docker-compose up --build
 ```
 - visit http://localhost
 
-### 2. Run Backend
+### 3. Run Backend
 - open new terminal
 ```bash
 cd backend && docker-compose up --build
 ```
 - visit http://localhost:8000/admin
 
-### 3. Create Admin SuperUser
+- Note: if you are unable to visit above url, please stop all backend conatiners and re-run 
+```bash
+docker-compose up --build
+```
+
+### 4. Create Admin SuperUser
 ```bash
 docker exec -it <container_name> bash
 ```
