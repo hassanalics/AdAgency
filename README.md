@@ -53,5 +53,29 @@ This Django project manages advertising budgets for multiple brands and their ca
 ```bash
 git clone https://github.com/hassanalics/AdAgency.git
 cd AdAgency
+```
+
+### 2. Run Frontend
+```bash
 cd frontend && docker-compose up --build
+```
+- visit http://localhost
+
+### 2. Run Backend
+- open new terminal
+```bash
 cd backend && docker-compose up --build
+```
+- visit http://localhost:8000/admin
+
+### 3. Create Admin SuperUser
+```bash
+docker exec -it <container_name> bash
+```
+conatianer_name is backend
+```bash
+python manage.py createsuperuser
+```
+- follow instruction to create super user
+- now again visit http://localhost:8000/admin and enter credentials
+
