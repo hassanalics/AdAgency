@@ -11,4 +11,4 @@ class CampaignSerializer(serializers.ModelSerializer):
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
-        fields = ["name", "daily_budget", "monthly_budget", "daily_spend", "monthly_spend"]
+        fields = ["id", "name", "daily_budget", "monthly_budget", "daily_spend", "monthly_spend"]
