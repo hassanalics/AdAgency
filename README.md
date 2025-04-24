@@ -49,7 +49,7 @@ This Django project manages advertising budgets for multiple brands and their ca
 
 ## 🧪 How to Run
 
-### 1. Clone and Build Docker Containers
+### 1. Clone
 ```bash
 git clone https://github.com/hassanalics/AdAgency.git
 cd AdAgency
@@ -81,6 +81,6 @@ conatianer_name is backend
 ```bash
 python manage.py createsuperuser
 ```
-- follow instruction to create super user
-- now again visit http://localhost:8000/admin and enter credentials
+- Please follow instruction to create super user
+- Now we can again visit http://localhost:8000/admin and enter credentials
 
