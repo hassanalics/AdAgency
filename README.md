@@ -84,3 +84,8 @@ python manage.py createsuperuser
 - Please follow instruction to create super user
 - Now we can again visit http://localhost:8000/admin and enter credentials
 
+### 5. Check Static Typing
+```bash
+mypy .
+```
+
